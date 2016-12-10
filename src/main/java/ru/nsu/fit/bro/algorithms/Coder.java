@@ -55,7 +55,7 @@ public class Coder {
     }
 
     private int nextByteNumber(int bound){
-        return Math.abs(pixelNumberGenerator.nextInt()) % bound;
+        return pixelNumberGenerator.nextInt(bound);
     }
 
     private void match(BufferedImage image, int byteNumber, byte b, int offset){
