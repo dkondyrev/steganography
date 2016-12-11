@@ -3,7 +3,6 @@ package ru.nsu.fit.bro.client;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.client.RestTemplate;
 
 @Controller
 public class WebController {
@@ -13,5 +12,4 @@ public class WebController {
 
         return "stenography";
     }
-
 }
