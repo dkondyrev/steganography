@@ -1,11 +1,93 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Getting Started: Serving Web Content</title>
+    <title>Getting Started: Stenography</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="bootstrap.min.css" rel="stylesheet"/>
+    <link href="bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width" />
+    <script type="text/javascript">
+        function random_number() {
+            var text_field = document.getElementById('random_number_field');
+            var number = Math.floor(Math.random() * 1000000000);
+            text_field.value = number.toString();
+        }
+    </script>
+
 </head>
 <body>
-<p th:text="'Hello, Stenography page!'" />
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" >Bro2Bro2Bro inc.</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="./index.html">Главная</a></li>
+                    <li><a href="./comments.php">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Содержание</li>
+                    <li>
+                        <a href="/">Сервисы</a>
+                        <ul>
+                            <li><a href="/stenography.html">Stenography</a></li>
+                            <li><a href="/stenography.html">Photo filter</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="center">
+            </div>
+        </div>
 
+
+
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Сервисы</a> <span class="divider">/</span>
+                </li>
+                <li class="active">Stenography</li>
+            </ul>
+            <h1>Stenography</h1>
+            <p>Сервис позволяет встраивать и извлекать сообщения, используя bmp-файлы</p>
+            <div class="code">
+                <p>
+                <b>Поле сообщения:</b><br />
+                    <label>
+                        <textarea rows="4" style="width: 98%; resize: none"></textarea>
+                    </label><br />
+                </p>
+                <p>
+                    <b>Случайное число:</b><br/>
+                    <label for="random_number_field"></label><input id="random_number_field" type="text" maxlength="25" size="40" />
+                    <br />
+                    <input type="button" onclick="random_number()" value="Сгенерировать число"/>
+                </p>
+            </div>
+        </div>
+        <div class="center">
+            <div>&nbsp;</div>
+        </div>
+    </div>
+    <hr />
+    <footer>
+        <p>&copy; bro2bro2bro 2016</p>
+    </footer>
+</div>
 </body>
 </html>
