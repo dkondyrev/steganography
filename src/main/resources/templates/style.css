@@ -1,0 +1,23 @@
+.code{
+    background-color:#F7F9FA;
+    border:1px dashed #8CACBB;
+    padding:0.5em;
+}
+.left_text{
+    margin-left: 30px;
+}
+.sidebar-nav {
+    margin: 50px 0px 20px 0px;
+}
+.hero-unit h1, h1 {
+    font-size: 30px;
+}
+.span9 {
+    margin: 50px 0px 0px 0px;
+}
+.center {
+    text-align: center;
+}
+.navbar .navbar-text {
+    padding: 7px 10px 0px 10px;
+}
