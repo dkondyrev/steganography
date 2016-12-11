@@ -10,8 +10,8 @@ import java.util.Random;
  * This class provides an interface for embedding a text into an image
  */
 public class Coder {
-    Random r = new SecureRandom();
-    Random pixelNumberGenerator;
+    private Random r = new SecureRandom();
+    private Random pixelNumberGenerator;
 
     /**
      *
