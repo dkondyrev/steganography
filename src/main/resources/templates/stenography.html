@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Getting Started: Stenography</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -7,16 +7,33 @@
     <link href="bootstrap-responsive.min.css" rel="stylesheet"/>
     <link href="style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width" />
-    <script type="text/javascript">
-        function random_number() {
-            var text_field = document.getElementById('random_number_field');
-            var number = Math.floor(Math.random() * 1000000000);
-            text_field.value = number.toString();
-        }
-    </script>
-
 </head>
 <body>
+<script type="text/javascript">
+    function random_number() {
+        var text_field = document.getElementById('random_number_field');
+        var number = Math.floor(Math.random() * 1000000000);
+        text_field.value = number.toString();
+    }
+    function loadImage(input) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("myimage");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function(event) {
+            var image = new Image;
+            image.src = reader.result;
+            imgtag.src = reader.result;
+            if (image.width >= 500)
+                imgtag.width='500';
+            else
+                imgtag.width=image.width;
+        };
+        reader.readAsDataURL(selectedFile);
+    }
+</script>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
         <div class="container-fluid">
@@ -68,26 +85,37 @@
             <div class="code">
                 <p>
                 <b>Поле сообщения:</b><br />
-                    <label>
-                        <textarea rows="4" style="width: 98%; resize: none"></textarea>
-                    </label><br />
+                    <textarea rows="4" style="width: 98%; resize: none"></textarea><br />
                 </p>
                 <p>
+                    <br/>
                     <b>Случайное число:</b><br/>
                     <label for="random_number_field"></label><input id="random_number_field" type="text" maxlength="25" size="40" />
                     <br />
                     <input type="button" onclick="random_number()" value="Сгенерировать число"/>
                 </p>
+                <center>
+                <p>
+                    <br/>
+                    <b>Здесь должна быть ваша картинка. В нее мы зашифруем ваше послание:</b><br/>
+                    <input TYPE="FILE" style="color:grey;" onchange="loadImage(this)">
+                    </input>
+                    <br/><br/>
+                    <img id="myimage"/>
+                    <br/><br/>
+                </p>
+                <p>
+                    <input id="send" TYPE="submit" value="Зашифровать послание" />
+                </p>
+                </center>
             </div>
         </div>
-        <div class="center">
-            <div>&nbsp;</div>
-        </div>
     </div>
-    <div class="footer">
+    <footer>
         <hr/>
         <p>&copy; bro2bro2bro 2016</p>
-    </div>
+    </footer>
 </div>
 </body>
+<script>random_number()</script>
 </html>
