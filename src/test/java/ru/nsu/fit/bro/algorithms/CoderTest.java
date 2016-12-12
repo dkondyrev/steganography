@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
 public class CoderTest {
     private String text = "This is text message for testing coder algorithm";
     private byte[] message = text.getBytes();
-    byte[] length = Bytes.intToBytes(message.length);
+    private byte[] length = Bytes.intToBytes(message.length);
     private int width = 900;
     private int height = 1700;
     private int bound = width * height * 3;
@@ -68,8 +68,8 @@ public class CoderTest {
     }
 
     private void testBytes(Random random, BufferedImage newIm, byte[] buffer){
-        for(int i = 0; i < buffer.length; i++){
-            for(int j = 0; j < 8; j++) {
+        for (byte bufferByte : buffer) {
+            for (int j = 0; j < 8; j++) {
                 int index = random.nextInt(bound);
 
                 int pixelNumber = index / 3;
@@ -77,7 +77,7 @@ public class CoderTest {
                 int x = pixelNumber % width;
                 byte newBit = extractLSB(newIm.getRGB(x, y), index % 3);
 
-                assertEquals("Incorrect LSB", extractLSB(buffer[i], j), newBit);
+                assertEquals("Incorrect LSB", extractLSB(bufferByte, j), newBit);
             }
         }
     }

@@ -32,16 +32,16 @@ public class Coder {
 
         byte[] length = Bytes.intToBytes(m.length);
 
-        for(int i = 0; i < length.length; i++){
-            for(int j = 0; j < 8; j++){
-                match(im, byteNumber, length[i], j);
+        for (byte b : length) {
+            for (int j = 0; j < 8; j++) {
+                match(im, byteNumber, b, j);
                 byteNumber = nextByteNumber(bound);
             }
         }
 
-        for(int i = 0; i < m.length; i++){
-            for(int j = 0; j < 8; j++){
-                match(im, byteNumber, m[i], j);
+        for (byte messageByte : m) {
+            for (int j = 0; j < 8; j++) {
+                match(im, byteNumber, messageByte, j);
                 byteNumber = nextByteNumber(bound);
             }
         }
