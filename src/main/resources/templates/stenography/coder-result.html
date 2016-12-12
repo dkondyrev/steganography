@@ -1,10 +1,11 @@
-<html>
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="content-type"/>
-    <title>Добро пожаловать на сайт</title>
-    <link href="bootstrap.min.css" rel="stylesheet"/>
-    <link href="bootstrap-responsive.min.css" rel="stylesheet"/>
-    <link href="style.css" rel="stylesheet"/>
+    <title>Getting Started: Stenography</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet"/>
+    <link href="../bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="../style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
@@ -36,7 +37,7 @@
                         <a href="/">Сервисы</a>
                         <ul>
                             <li><a href="/stenography.html">Stenography</a></li>
-                            <li><a href="/">Photo filter</a></li>
+                            <li><a href="/">Photo Filter</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -52,19 +53,14 @@
                 <li>
                     <a href="/">Сервисы</a> <span class="divider">/</span>
                 </li>
-                <li class="active"></li>
+                <li><a href="/stenography.html">Stenography</a> <span class="divider">/</span></li>
+                <li><a href="/stenography/coder">Coder</a> <span class="divider">/</span></li>
+                <li class="active">Result</li>
             </ul>
-            <h1>Добро пожаловать на главную страницу сайта</h1>
-            <p>В данном разделе представлены наши сервисы</p>
-            <ul>
-                <li><a href="/stenography.html">Stenography</a>
-                    <ul>
-                        <li><a href="/stenography/coder.html">Coder</a></li>
-                        <li><a href="/stenography/decoder.html">Decoder</a></li>
-                    </ul>
-                </li>
-                <li><a href="/">Photo filter</a>
-            </ul>
+            <h1>Результат</h1>
+            <div class="code">
+                тут результат выполнения Диминого кода
+            </div>
         </div>
     </div>
     <div class="footer">

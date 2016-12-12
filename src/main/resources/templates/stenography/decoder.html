@@ -3,18 +3,13 @@
 <head>
     <title>Getting Started: Stenography</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="bootstrap.min.css" rel="stylesheet"/>
-    <link href="bootstrap-responsive.min.css" rel="stylesheet"/>
-    <link href="style.css" rel="stylesheet"/>
+    <link href="../bootstrap.min.css" rel="stylesheet"/>
+    <link href="../bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="../style.css" rel="stylesheet"/>
     <meta name="viewport" content="width=device-width" />
 </head>
 <body>
 <script type="text/javascript">
-    function random_number() {
-        var text_field = document.getElementById('random_number_field');
-        var number = Math.floor(Math.random() * 1000000000);
-        text_field.value = number.toString();
-    }
     function loadImage(input) {
         var selectedFile = event.target.files[0];
         var reader = new FileReader();
@@ -34,19 +29,6 @@
         reader.readAsDataURL(selectedFile);
     }
     function validate_form () {
-        var crypto_text = document.getElementById('crypto_text');
-        if (!crypto_text.value)
-        {
-            alert ( "Заполните поле с текстом послания для зашифровки." );
-            return false;
-        }
-        var random_number_field = document.getElementById('random_number_field');
-        var random_number = parseFloat(random_number_field.value);
-        if (isNaN(random_number))
-        {
-            alert ( "Недопустимое число для шифрования." );
-            return false;
-        }
         var file_with_img = document.getElementById('file_with_img');
         if (!file_with_img.value)
         {
@@ -67,7 +49,7 @@
             <a class="brand" >Bro2Bro2Bro inc.</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="/">Главная</a></li>
+                    <li class="active"><a href="./index.html">Главная</a></li>
                     <li><a href="./comments.php">Контакты</a></li>
                 </ul>
             </div>
@@ -84,7 +66,7 @@
                         <a href="/">Сервисы</a>
                         <ul>
                             <li><a href="/stenography.html">Stenography</a></li>
-                            <li><a href="/">Photo filter</a></li>
+                            <li><a href="/">Photo Filter</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -100,20 +82,35 @@
                 <li>
                     <a href="/">Сервисы</a> <span class="divider">/</span>
                 </li>
-                <li class="active">Stenography</li>
+                <li><a href="/stenography.html">Stenography</a> <span class="divider">/</span></li>
+                <li class="active">Decoder</li>
             </ul>
-            <h1>Stenography</h1>
-            <p>Сервис позволяет встраивать и извлекать сообщения, используя bmp-файлы</p>
-            <ul>
-                <li><a href="/stenography/coder.html">Coder</a></li>
-                <li><a href="/stenography/decoder.html">Decoder</a></li>
-            </ul>
+            <h1>Decoder</h1>
+            <p>Здесь можно расшифровать текст из картинки</p>
+            <div class="code">
+                <form name="send" enctype="multipart/form-data" action="/stenography-result.html" method="post" onsubmit="return validate_form ( );">
+                    <center>
+                        <p><br/>
+                            <b>Здесь должна быть ваша картинка с зашифрованным текстом внутри:</b><br/>
+                            <input id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
+                            </input><br/><br/>
+                            <img id="myimage"/><br/><br/>
+                        </p>
+                        <p>
+                            <input id="send" type="submit" value="Расшифровать послание" />
+                        </p>
+                    </center>
+                </form>
+            </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
     <div class="footer">
         <p>&copy; bro2bro2bro 2016</p>
     </div>
 </div>
 </body>
-<script>random_number()</script>
 </html>
