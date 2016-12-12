@@ -50,7 +50,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="active"><a href="./index.html">Главная</a></li>
-                    <li><a href="./comments.php">Контакты</a></li>
+                    <li><a href="/contacts">Контакты</a></li>
                 </ul>
             </div>
         </div>
@@ -74,9 +74,6 @@
             <div class="center">
             </div>
         </div>
-
-
-
         <div class="span9">
             <ul class="breadcrumb">
                 <li>
@@ -88,8 +85,8 @@
             <h1>Decoder</h1>
             <p>Здесь можно расшифровать текст из картинки</p>
             <div class="code">
-                <form name="send" enctype="multipart/form-data" action="/stenography-result.html" method="post" onsubmit="return validate_form ( );">
-                    <center>
+                <form name="send" enctype="multipart/form-data" action="/stenography/decoder-result.html" method="post" onsubmit="return validate_form ( );">
+                    <div style="text-align: center;">
                         <p><br/>
                             <b>Здесь должна быть ваша картинка с зашифрованным текстом внутри:</b><br/>
                             <input name="image" id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
@@ -99,7 +96,7 @@
                         <p>
                             <input id="send" type="submit" value="Расшифровать послание" />
                         </p>
-                    </center>
+                    </div>
                 </form>
             </div>
         </div>

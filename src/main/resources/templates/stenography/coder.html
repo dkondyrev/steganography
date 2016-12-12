@@ -68,7 +68,7 @@
             <div class="nav-collapse">
                 <ul class="nav">
                     <li class="active"><a href="./index.html">Главная</a></li>
-                    <li><a href="./comments.php">Контакты</a></li>
+                    <li><a href="/contacts">Контакты</a></li>
                 </ul>
             </div>
         </div>
@@ -92,9 +92,6 @@
             <div class="center">
             </div>
         </div>
-
-
-
         <div class="span9">
             <ul class="breadcrumb">
                 <li>
@@ -117,7 +114,7 @@
                         <input name="number" id="random_number_field" type="text" maxlength="25" size="40" /><br />
                         <input type="button" onclick="random_number()" value="Сгенерировать число"/>
                     </p>
-                    <center>
+                    <div style="text-align: center;">
                         <p><br/>
                             <b>Здесь должна быть ваша картинка. В нее мы зашифруем ваше послание:</b><br/>
                             <input name="image" id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
@@ -127,7 +124,7 @@
                         <p>
                             <input id="send" type="submit" value="Зашифровать послание" />
                         </p>
-                    </center>
+                    </div>
                 </form>
             </div>
         </div>
