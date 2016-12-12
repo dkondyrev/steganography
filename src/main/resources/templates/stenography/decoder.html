@@ -1,10 +1,116 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Getting Started: Stenography</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet"/>
+    <link href="../bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="../style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width" />
 </head>
 <body>
-$END$
+<script type="text/javascript">
+    function loadImage(input) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("myimage");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function(event) {
+            var image = new Image;
+            image.src = reader.result;
+            imgtag.src = reader.result;
+            if (image.width >= 500)
+                imgtag.width='500';
+            else
+                imgtag.width=image.width;
+        };
+        reader.readAsDataURL(selectedFile);
+    }
+    function validate_form () {
+        var file_with_img = document.getElementById('file_with_img');
+        if (!file_with_img.value)
+        {
+            alert ( "Файл с картинкой не выбран." );
+            return false;
+        }
+        return true;
+    }
+</script>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" >Bro2Bro2Bro inc.</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="./index.html">Главная</a></li>
+                    <li><a href="./comments.php">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Содержание</li>
+                    <li>
+                        <a href="/">Сервисы</a>
+                        <ul>
+                            <li><a href="/stenography.html">Stenography</a></li>
+                            <li><a href="/">Photo Filter</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="center">
+            </div>
+        </div>
+
+
+
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Сервисы</a> <span class="divider">/</span>
+                </li>
+                <li><a href="/stenography.html">Stenography</a> <span class="divider">/</span></li>
+                <li class="active">Decoder</li>
+            </ul>
+            <h1>Decoder</h1>
+            <p>Здесь можно расшифровать текст из картинки</p>
+            <div class="code">
+                <form name="send" enctype="multipart/form-data" action="/stenography-result.html" method="post" onsubmit="return validate_form ( );">
+                    <center>
+                        <p><br/>
+                            <b>Здесь должна быть ваша картинка с зашифрованным текстом внутри:</b><br/>
+                            <input id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
+                            </input><br/><br/>
+                            <img id="myimage"/><br/><br/>
+                        </p>
+                        <p>
+                            <input id="send" type="submit" value="Расшифровать послание" />
+                        </p>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="footer">
+        <p>&copy; bro2bro2bro 2016</p>
+    </div>
+</div>
 </body>
 </html>

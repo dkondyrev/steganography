@@ -1,10 +1,144 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>Getting Started: Stenography</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="../bootstrap.min.css" rel="stylesheet"/>
+    <link href="../bootstrap-responsive.min.css" rel="stylesheet"/>
+    <link href="../style.css" rel="stylesheet"/>
+    <meta name="viewport" content="width=device-width" />
 </head>
 <body>
-$END$
+<script type="text/javascript">
+    function random_number() {
+        var text_field = document.getElementById('random_number_field');
+        var number = Math.floor(Math.random() * 1000000000);
+        text_field.value = number.toString();
+    }
+    function loadImage(input) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("myimage");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function(event) {
+            var image = new Image;
+            image.src = reader.result;
+            imgtag.src = reader.result;
+            if (image.width >= 500)
+                imgtag.width='500';
+            else
+                imgtag.width=image.width;
+        };
+        reader.readAsDataURL(selectedFile);
+    }
+    function validate_form () {
+        var crypto_text = document.getElementById('crypto_text');
+        if (!crypto_text.value)
+        {
+            alert ( "Заполните поле с текстом послания для зашифровки." );
+            return false;
+        }
+        var random_number_field = document.getElementById('random_number_field');
+        var random_number = parseFloat(random_number_field.value);
+        if (isNaN(random_number))
+        {
+            alert ( "Недопустимое число для шифрования." );
+            return false;
+        }
+        var file_with_img = document.getElementById('file_with_img');
+        if (!file_with_img.value)
+        {
+            alert ( "Файл с картинкой не выбран." );
+            return false;
+        }
+        return true;
+    }
+</script>
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" >Bro2Bro2Bro inc.</a>
+            <div class="nav-collapse">
+                <ul class="nav">
+                    <li class="active"><a href="./index.html">Главная</a></li>
+                    <li><a href="./comments.php">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Содержание</li>
+                    <li>
+                        <a href="/">Сервисы</a>
+                        <ul>
+                            <li><a href="/stenography.html">Stenography</a></li>
+                            <li><a href="/">Photo Filter</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="center">
+            </div>
+        </div>
+
+
+
+        <div class="span9">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Сервисы</a> <span class="divider">/</span>
+                </li>
+                <li><a href="/stenography.html">Stenography</a> <span class="divider">/</span></li>
+                <li class="active">Coder</li>
+            </ul>
+            <h1>Coder</h1>
+            <p>Здесь текст кодируется в картинку</p>
+            <div class="code">
+                <form name="send" enctype="multipart/form-data" action="/stenography/coder-result.html" method="post" onsubmit="return validate_form ( );">
+                    <p>
+                        <b>Поле сообщения:</b><br />
+                        <textarea id="crypto_text" rows="2" style="width: 98%; resize: none"></textarea><br />
+                    </p>
+                    <p><br/>
+                        <b>Случайное число:</b><br/>
+                        <label for="random_number_field"></label><input id="random_number_field" type="text" maxlength="25" size="40" /><br />
+                        <input type="button" onclick="random_number()" value="Сгенерировать число"/>
+                    </p>
+                    <center>
+                        <p><br/>
+                            <b>Здесь должна быть ваша картинка. В нее мы зашифруем ваше послание:</b><br/>
+                            <input id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
+                            </input><br/><br/>
+                            <img id="myimage"/><br/><br/>
+                        </p>
+                        <p>
+                            <input id="send" type="submit" value="Зашифровать послание" />
+                        </p>
+                    </center>
+                </form>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div class="footer">
+        <p>&copy; bro2bro2bro 2016</p>
+    </div>
+</div>
 </body>
+<script>random_number()</script>
 </html>
