@@ -67,7 +67,7 @@
             <a class="brand" >Bro2Bro2Bro inc.</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="./index.html">Главная</a></li>
+                    <li class="active"><a href="/">Главная</a></li>
                     <li><a href="./comments.php">Контакты</a></li>
                 </ul>
             </div>
@@ -84,7 +84,7 @@
                         <a href="/">Сервисы</a>
                         <ul>
                             <li><a href="/stenography.html">Stenography</a></li>
-                            <li><a href="/stenography-result.html">Photo filter</a></li>
+                            <li><a href="/">Photo filter</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -104,36 +104,15 @@
             </ul>
             <h1>Stenography</h1>
             <p>Сервис позволяет встраивать и извлекать сообщения, используя bmp-файлы</p>
-            <div class="code">
-                <form name="send" enctype="multipart/form-data" action="/stenography-result.html" method="post" onsubmit="return validate_form ( );">
-                <p>
-                <b>Поле сообщения:</b><br />
-                    <textarea id="crypto_text" rows="4" style="width: 98%; resize: none"></textarea><br />
-                </p>
-                <p><br/>
-                    <b>Случайное число:</b><br/>
-                    <label for="random_number_field"></label><input id="random_number_field" type="text" maxlength="25" size="40" /><br />
-                    <input type="button" onclick="random_number()" value="Сгенерировать число"/>
-                </p>
-                <center>
-                <p><br/>
-                    <b>Здесь должна быть ваша картинка. В нее мы зашифруем ваше послание:</b><br/>
-                    <input id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
-                    </input><br/><br/>
-                    <img id="myimage"/><br/><br/>
-                </p>
-                <p>
-                    <input id="send" type="submit" value="Зашифровать послание" />
-                </p>
-                </center>
-                </form>
-            </div>
+            <ul>
+                <li><a href="/stenography/coder.html">Coder</a></li>
+                <li><a href="/stenography/decoder.html">Decoder</a></li>
+            </ul>
         </div>
     </div>
-    <footer>
-        <hr/>
+    <div class="footer">
         <p>&copy; bro2bro2bro 2016</p>
-    </footer>
+    </div>
 </div>
 </body>
 <script>random_number()</script>
