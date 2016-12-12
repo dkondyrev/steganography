@@ -33,6 +33,28 @@
         };
         reader.readAsDataURL(selectedFile);
     }
+    function validate_form () {
+        var crypto_text = document.getElementById('crypto_text');
+        if (!crypto_text.value)
+        {
+            alert ( "Заполните поле с текстом послания для зашифровки." );
+            return false;
+        }
+        var random_number_field = document.getElementById('random_number_field');
+        var random_number = parseFloat(random_number_field.value);
+        if (isNaN(random_number))
+        {
+            alert ( "Недопустимое число для шифрования." );
+            return false;
+        }
+        var file_with_img = document.getElementById('file_with_img');
+        if (!file_with_img.value)
+        {
+            alert ( "Файл с картинкой не выбран." );
+            return false;
+        }
+        return true;
+    }
 </script>
 <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
@@ -83,10 +105,10 @@
             <h1>Stenography</h1>
             <p>Сервис позволяет встраивать и извлекать сообщения, используя bmp-файлы</p>
             <div class="code">
-                <form name="send" enctype="multipart/form-data" action="/stenography-result.html" method="post">
+                <form name="send" enctype="multipart/form-data" action="/stenography-result.html" method="post" onsubmit="return validate_form ( );">
                 <p>
                 <b>Поле сообщения:</b><br />
-                    <textarea rows="4" style="width: 98%; resize: none"></textarea><br />
+                    <textarea id="crypto_text" rows="4" style="width: 98%; resize: none"></textarea><br />
                 </p>
                 <p><br/>
                     <b>Случайное число:</b><br/>
@@ -96,7 +118,7 @@
                 <center>
                 <p><br/>
                     <b>Здесь должна быть ваша картинка. В нее мы зашифруем ваше послание:</b><br/>
-                    <input type="file" style="color:grey;" onchange="loadImage(this)">
+                    <input id="file_with_img" type="file" style="color:grey;" onchange="loadImage(this)">
                     </input><br/><br/>
                     <img id="myimage"/><br/><br/>
                 </p>
