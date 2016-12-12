@@ -1,13 +1,13 @@
 package ru.nsu.fit.bro.rest.model;
 
-public class StenographyResponse {
+public class StenographyImageResponse {
 
     private String image;
 
-    public StenographyResponse() {
+    public StenographyImageResponse() {
     }
 
-    public StenographyResponse(String image) {
+    public StenographyImageResponse(String image) {
         this.image = image;
     }
 
