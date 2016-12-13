@@ -59,9 +59,8 @@
             </ul>
             <h1>Результат</h1>
             <div class="code">
-                <a href="6463feee-c85a-475e-b7a8-155b225a3f6b.bmp">Скачать файл</a>
-                тут результат выполнения Диминого кода
-                <p th:text="'id: ' + ${String}" ></p>
+                <a th:href="'download?path=' + ${String}">Скачать файл</a>
+                <!--<p th:text="'key: ' + ${ru.nsu.fit.bro.client.model.CoderResultInfo.getKey()}" ></p>-->
             </div>
         </div>
     </div>

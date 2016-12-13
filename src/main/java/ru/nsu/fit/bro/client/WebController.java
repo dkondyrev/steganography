@@ -5,8 +5,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +16,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.bro.rest.model.StenographyImageResponse;
 
+import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLConnection;
+import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.UUID;
 
@@ -54,26 +59,58 @@ public class WebController {
 
             HttpEntity<String> entity = new HttpEntity<String>(Base64.getEncoder().encodeToString(bytes), headers);
             RestTemplate restTemplate = new RestTemplate();
-            StenographyImageResponse response = restTemplate.postForObject(uri, entity, StenographyImageResponse.class);
+            StenographyImageResponse re = restTemplate.postForObject(uri, entity, StenographyImageResponse.class);
 
 
-            byte[] result = Base64.getDecoder().decode(response.getImage());
+            byte[] result = Base64.getDecoder().decode(re.getImage());
 
             File file = new File("images/" + UUID.randomUUID().toString() + ".bmp");
             FileOutputStream fos = new FileOutputStream(file);
             fos.write(result);
             fos.close();
 
-            System.out.println(new File(".").getAbsolutePath());
-
             model.addAttribute("String", file.getAbsolutePath());
-            //String path = file.getAbsolutePath();
         } else {
-            //тут можно типа просто писать, что фэйл.
-            //return "Вам не удалось загрузить " + name + " потому что файл пустой.";
+            //тут похорошему нужно сообщать о ошибке
+            //return "stenography/error_page";
         }
 
         return "stenography/coder-result";
+    }
+
+
+
+    @RequestMapping(value="stenography/download", method = RequestMethod.GET)
+    public void downloadFile(HttpServletResponse response, @RequestParam("path") String path) throws IOException {
+
+        File file = new File(path);
+        if(!file.exists()){
+            String errorMessage = "Sorry. The file you are looking for does not exist";
+            OutputStream outputStream = response.getOutputStream();
+            outputStream.write(errorMessage.getBytes(Charset.forName("UTF-8")));
+            outputStream.close();
+            return;
+        }
+
+        String mimeType= URLConnection.guessContentTypeFromName(file.getName());
+        if(mimeType==null){
+            mimeType = "application/octet-stream";
+        }
+
+        response.setContentType(mimeType);
+
+        /* "Content-Disposition : inline" will show viewable types [like images/text/pdf/anything viewable by browser] right on browser
+            while others(zip e.g) will be directly downloaded [may provide save as popup, based on your browser setting.]*/
+        //response.setHeader("Content-Disposition", String.format("inline; filename=\"" + file.getName() +"\""));
+
+        /* "Content-Disposition : attachment" will be directly download, may provide save as popup, based on your browser setting*/
+        response.setHeader("Content-Disposition", String.format("attachment; filename=\"%s\"", file.getName()));
+
+        response.setContentLength((int)file.length());
+
+        InputStream inputStream = new BufferedInputStream(new FileInputStream(file));
+
+        FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
     @RequestMapping("/stenography/decoder-result")
