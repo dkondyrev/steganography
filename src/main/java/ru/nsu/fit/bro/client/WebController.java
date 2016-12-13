@@ -16,6 +16,7 @@ import ru.nsu.fit.bro.rest.model.StenographyImageResponse;
 
 import java.io.*;
 import java.util.Base64;
+import java.util.UUID;
 
 @Controller
 public class WebController {
@@ -55,11 +56,20 @@ public class WebController {
             RestTemplate restTemplate = new RestTemplate();
             StenographyImageResponse response = restTemplate.postForObject(uri, entity, StenographyImageResponse.class);
 
+
             byte[] result = Base64.getDecoder().decode(response.getImage());
-            FileOutputStream fos = new FileOutputStream("image.bmp");
+
+            File file = new File("images/" + UUID.randomUUID().toString() + ".bmp");
+            FileOutputStream fos = new FileOutputStream(file);
             fos.write(result);
             fos.close();
+
+            System.out.println(new File(".").getAbsolutePath());
+
+            model.addAttribute("String", file.getAbsolutePath());
+            //String path = file.getAbsolutePath();
         } else {
+            //тут можно типа просто писать, что фэйл.
             //return "Вам не удалось загрузить " + name + " потому что файл пустой.";
         }
 
