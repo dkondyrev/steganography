@@ -4,6 +4,9 @@ public class StenographyMessageResponse {
 
     private String message;
 
+    public StenographyMessageResponse() {
+    }
+
     public StenographyMessageResponse(String message) {
         this.message = message;
     }

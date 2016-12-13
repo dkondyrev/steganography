@@ -35,5 +35,4 @@ public class StenographyRestController {
 
         return new StenographyMessageResponse(message);
     }
-
 }

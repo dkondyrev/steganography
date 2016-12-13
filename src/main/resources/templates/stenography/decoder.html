@@ -86,7 +86,10 @@
             <p>Здесь можно расшифровать текст из картинки</p>
             <div class="code">
                 <form name="send" enctype="multipart/form-data" action="/stenography/decoder-result.html" method="post" onsubmit="return validate_form ( );">
-                    <div style="text-align: center;">
+                    <center>
+                        <b>Введите ключ:</b><br/>
+                        <label for="key"></label>
+                        <input name="key" id="key" type="text" maxlength="25" size="40" /><br />
                         <p><br/>
                             <b>Здесь должна быть ваша картинка с зашифрованным текстом внутри:</b><br/>
                             <input name="image" id="file_with_img" type="file" accept="image/*" style="color:grey;" onchange="loadImage(this)">
@@ -96,7 +99,7 @@
                         <p>
                             <input id="send" type="submit" value="Расшифровать послание" />
                         </p>
-                    </div>
+                    </center>
                 </form>
             </div>
         </div>

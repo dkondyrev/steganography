@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 import ru.nsu.fit.bro.rest.model.StenographyImageResponse;
+import ru.nsu.fit.bro.rest.model.StenographyMessageResponse;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -78,8 +79,6 @@ public class WebController {
         return "stenography/coder-result";
     }
 
-
-
     @RequestMapping(value="stenography/download", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, @RequestParam("path") String path) throws IOException {
 
@@ -113,8 +112,32 @@ public class WebController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
-    @RequestMapping("/stenography/decoder-result")
-    public String providedDecoderResultPage(Model model) {
+    @RequestMapping(value = "/stenography/decoder-result", method = RequestMethod.POST)
+    public String providedDecoderResultPage(@RequestParam("key") String key,
+                                            @RequestParam("image") MultipartFile image,
+                                            Model model) throws IOException {
+
+        if (!image.isEmpty()) {
+
+            final String uri = "http://localhost:8080/rest/stenography/decode";
+
+            byte[] bytes = image.getBytes();
+
+            MultiValueMap<String, String> headers = new LinkedMultiValueMap<String, String>();
+            headers.add("key", key);
+
+            HttpEntity<String> entity = new HttpEntity<String>(Base64.getEncoder().encodeToString(bytes), headers);
+            RestTemplate restTemplate = new RestTemplate();
+            StenographyMessageResponse re = restTemplate.postForObject(uri, entity, StenographyMessageResponse .class);
+
+            String decodedMessage = re.getMessage();
+
+            model.addAttribute("String", decodedMessage);
+        } else {
+            //тут похорошему нужно сообщать о ошибке
+            //return "stenography/error_page";
+        }
+
         return "stenography/decoder-result";
     }
 }
