@@ -9,10 +9,21 @@ import ru.nsu.fit.bro.rest.model.StenographyMessageResponse;
 import java.io.IOException;
 import java.util.Base64;
 
+/**
+ * Класс реаизует REST API к сервису онлайн стеганографии
+ */
 @RestController
 @RequestMapping("/rest/stenography")
 public class StenographyRestController {
 
+    /**
+     * Метод предоставлет rest service для кодирования изображений.
+     * @param data изображение в формате base64.
+     * @param message сообщение которое необходимо закодировать
+     * @param key ключ для кодировани
+     * @return возвращается закодирование изоражение в json {"image":"закодирование сообщение в base64"}
+     * @throws IOException
+     */
     @RequestMapping(value = "/encode", method = RequestMethod.POST)
     StenographyImageResponse encode(@RequestBody String data,
                                     @RequestHeader(value="message") String message,
@@ -25,6 +36,13 @@ public class StenographyRestController {
         return new StenographyImageResponse(Base64.getEncoder().encodeToString(codedImage));
     }
 
+    /**
+     * Метод предоставлет rest service для раскодирования изображений.
+     * @param data изображение в формате base64.
+     * @param key ключ используемый при кодировании
+     * @return возвращается закодирование сообщение в json {"message":"..."}
+     * @throws IOException
+     */
     @RequestMapping(value = "/decode", method = RequestMethod.POST)
     StenographyMessageResponse decode(@RequestBody String data,
                                       @RequestHeader(value="key") long key) throws IOException {

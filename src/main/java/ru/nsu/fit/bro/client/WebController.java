@@ -24,6 +24,9 @@ import java.nio.charset.Charset;
 import java.util.Base64;
 import java.util.UUID;
 
+/**
+ * Основной контроллер сайта
+ */
 @Controller
 public class WebController {
 
@@ -34,7 +37,6 @@ public class WebController {
 
     @RequestMapping("/stenography/coder")
     public String providedCoderPage(Model model) {
-
         return "stenography/coder";
     }
 
@@ -43,6 +45,15 @@ public class WebController {
         return "stenography/decoder";
     }
 
+    /**
+     *
+     * @param message сообщение для кодирования
+     * @param number ключ для кодирования
+     * @param image изображение для кодирования в байтах(формат bmp)
+     * @param model
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/stenography/coder-result", method = RequestMethod.POST)
     public String providedCoderResultPage(@RequestParam("message") String message,
                                           @RequestParam("number") String number,
@@ -79,6 +90,12 @@ public class WebController {
         return "stenography/coder-result";
     }
 
+    /**
+     *
+     * @param response
+     * @param path путь до файла
+     * @throws IOException
+     */
     @RequestMapping(value="stenography/download", method = RequestMethod.GET)
     public void downloadFile(HttpServletResponse response, @RequestParam("path") String path) throws IOException {
 
@@ -112,6 +129,14 @@ public class WebController {
         FileCopyUtils.copy(inputStream, response.getOutputStream());
     }
 
+    /**
+     *
+     * @param key ключ для раскодирования
+     * @param image закодированное ранее изоражение
+     * @param model
+     * @return
+     * @throws IOException
+     */
     @RequestMapping(value = "/stenography/decoder-result", method = RequestMethod.POST)
     public String providedDecoderResultPage(@RequestParam("key") String key,
                                             @RequestParam("image") MultipartFile image,
