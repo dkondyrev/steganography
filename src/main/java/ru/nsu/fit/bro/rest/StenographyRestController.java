@@ -25,7 +25,7 @@ public class StenographyRestController {
      * @throws IOException
      */
     @RequestMapping(value = "/encode", method = RequestMethod.POST)
-    StenographyImageResponse encode(@RequestBody String data,
+    public StenographyImageResponse encode(@RequestBody String data,
                                     @RequestHeader(value="message") String message,
                                     @RequestHeader(value="key") long key) throws IOException {
 
@@ -44,7 +44,7 @@ public class StenographyRestController {
      * @throws IOException
      */
     @RequestMapping(value = "/decode", method = RequestMethod.POST)
-    StenographyMessageResponse decode(@RequestBody String data,
+    public StenographyMessageResponse decode(@RequestBody String data,
                                       @RequestHeader(value="key") long key) throws IOException {
 
         byte[] image = Base64.getDecoder().decode(data);
